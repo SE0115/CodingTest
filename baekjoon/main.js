@@ -1,13 +1,11 @@
 // const input =  require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 
-const input =`(()[[]])([])`;
+const input = `7`.split('\n');
+let card= Array.from({length: input[0]}, (v, i)=> i+1);
 
-let cnt1=0;
-let cnt2=0;
-let before;
-for(let i=0; i<input.length;i++){
-    
+while(card.length>1){
+    card.shift();
+    let temp = card.shift();
+    card.push(temp);
 }
-
-
-
+console.log(card);
