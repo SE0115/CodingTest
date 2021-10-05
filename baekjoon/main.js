@@ -1,39 +1,21 @@
 // const input =  require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 
-let input = `5
--1
--2
--3
--1
--2`.split('\n').map(x => Number(x));
+let input = `4 3
+9 7 4
+9 7 4`.split('\n');
 
-const len = input.shift();
-let result=[];
-input = input.sort((a,b)=> a-b);
-// console.log(input);
-const temp = input.reduce((acc, cur) => { 
-    acc[cur] = (acc[cur] || 0)+1; 
-    return acc;
-  }, {});
+let result = [];
+const setA = input[1].split(' ').sort((a,b)=> a-b);
+const setB = input[2].split(' ');
 
-// console.log(temp);
-
-let sortobj = [];
-let max = 0;
-for (let number in temp) {
-    max = (max < temp[number]? temp[number] : max);
-    sortobj.push([number, temp[number]]);
+result = setA.filter(x => !setB.includes(x));
+result.unshift(result.length);
+if(result.length === 0)
+{
+  console.log(result.length);
 }
-  
-let temp2 =[];
-temp2 = sortobj.filter(x => Number(x[1])===max);
-temp2.sort(function(a, b) {
-    return a[0] - b[0];
-  });
-  
-result.push(Math.round(input.reduce((acc, cur) => {return acc + cur}) / len));
-result.push(input[parseInt(input.length/2)]);
-result.push((temp2.length > 1) ? Number(temp2[1][0]) : Number(temp2[0][0]));
-result.push(input[input.length-1] - input[0]);
+else{
+  console.log(result.length);
+  console.log(result.join(' '));
 
-console.log(result.join('\n'));
+}
