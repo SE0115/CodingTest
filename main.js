@@ -4,31 +4,23 @@
 // 9 7 4
 // 9 7 4`.split('\n');
 
-const input = '1111111';
+const input = `15`.split('\n').map(x=>Number(x));
 
-function solution(s) {
-  let tr_cnt=0;
-  let zero_cnt=0;
-  let before_length=s.length;
+let next = input[0] + 1;
 
-  while(s !== '1') {
-    s=s.split('').filter(x => x ==='1');
-    zero_cnt += before_length - s.length;
-    s = decTo2(s.length);
-    tr_cnt += 1;
-    before_length = s.length;
-  }
-  return [tr_cnt, zero_cnt];
+while(decTo2(input[0]) !== decTo2(next)){
+  next += 1;
 }
 
-function decTo2(num) {
-  let result = '';
+console.log(next);
+
+function decTo2(num){
+  let result ='';
   while(num){
-    result = num % 2 + result;
+    result = num % 2 +result;
     num = parseInt(num/2);
   }
-  return result;
-}
 
-solution(input);
+  return result.split('').filter(x=>x==='1').length;
+}
 
