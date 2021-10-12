@@ -4,23 +4,13 @@
 // 9 7 4
 // 9 7 4`.split('\n');
 
-const input = `15`.split('\n').map(x=>Number(x));
+const input = `-1 -2 -3 -4`;
 
-let next = input[0] + 1;
-
-while(decTo2(input[0]) !== decTo2(next)){
-  next += 1;
+function solution(s) {
+  let max, min;
+  s = s.split(' ').map(x=>Number(x)).sort((a,b) => a-b);
+  
+  return (s[0]+' '+s[s.length-1]);
 }
 
-console.log(next);
-
-function decTo2(num){
-  let result ='';
-  while(num){
-    result = num % 2 +result;
-    num = parseInt(num/2);
-  }
-
-  return result.split('').filter(x=>x==='1').length;
-}
-
+console.log(solution(input));
