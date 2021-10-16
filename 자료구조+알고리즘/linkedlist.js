@@ -1,5 +1,5 @@
 class Node {
-    constructor(data) {
+    constructor(datan) {
         this.data = data;
         this.next = null;
     }
@@ -9,15 +9,15 @@ class LinkedList {
     constructor() {
         this.head = null;
         this.tail = null;
-        this.size=0;
+        this.size = 0;
     }
     insert(data) {
         const newNode = new Node(data);
-        if(!this.head){
+        if(!this.head) {
             this.head = newNode;
             this.tail = newNode;
         }
-        else{
+        else {
             const temp = this.tail;
             temp.next = newNode;
             this.tail = newNode;
