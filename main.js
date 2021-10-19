@@ -1,18 +1,66 @@
 // const input =  require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 
-const input = `4
-3 5 2 7`.split('\n');
+const input = `15
+push 1
+push 2
+front
+back
+size
+empty
+pop
+pop
+pop
+size
+empty
+pop
+push 3
+empty
+front`.split('\n');
 
-const len = input.shift();
-let result = [];
-let nums = input[0].split(' ').map(x=> Number(x));
-
-for(let i=0;i<len;i++){
-  let num = nums.shift();
-  let filtered = nums.filter(x=> x>num);
-  result.push(filtered.length ? filtered[0] : -1);
+class Queue {
+  constructor() {
+    this.queue=[];
+    this.size=0;
+  }
+  push(data) {
+    this.queue.push(data);
+    this.size++;
+  }
+  pop() {
+    if(!this.size) {
+      return -1;
+    }
+    const popped = this.queue.shift();
+    this.size--;
+    return popped;
+  }
+  isEmpty() {
+    return (!this.size ? 1 : 0);
+  }
+  front() {
+    return (!this.size ? -1 : this.queue[0]);
+  }
+  back() {
+    return (!this.size ? -1 : this.queue[this.size-1]);
+  }
 }
 
-console.log(result.join(' '));
+const len = input.shift();
+const queue = new Queue();
+let result = [];
 
-// 메모리 초과.... 다시...
+for(let i=0;i<len;i++) {
+  let command = input[i].split(' ');
+  switch(command[0]) {
+    case "push" : queue.push(command[1]); break;
+    case "pop" : result.push(queue.pop()); break;
+    case "size" : result.push(queue.size); break;
+    case "empty" : result.push(queue.isEmpty()); break;
+    case "front" : result.push(queue.front()); break;
+    case "back" : result.push(queue.back()); break;
+  }
+}
+
+console.log(result.join('\n'));
+
+// 시간초과
